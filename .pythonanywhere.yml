@@ -1,0 +1,11 @@
+# .pythonanywhere.yml
+source:
+  post_setup:
+    - "pip install -r requirements.txt"
+    - "python manage.py migrate"
+    - "echo 'Setup complete'"
+
+web_app:
+  setup:
+    - "python manage.py collectstatic --noinput"
+  reload: "python manage.py check --deploy"
