@@ -33,6 +33,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+# settings.py
+ALLOWED_HOSTS = ['muindejk.pythonanywhere.com', 'localhost', '127.0.0.1']
+
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -101,10 +105,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.sqlite3',
+   #     'NAME': BASE_DIR / 'db.sqlite3',
+    #}
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'muindejk$default',
+        'USER': 'muindejk',
+        'PASSWORD': 'BqqPass2025.',
+        'HOST': 'muindejk.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -151,16 +168,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# For verification emails
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-#EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "your-email@gmail.com"
-EMAIL_HOST_PASSWORD = "your-email-app-password"
-DEFAULT_FROM_EMAIL = "Spotter <your-email@gmail.com>"
-
 # Add your frontend app domain here for the verification link
 FRONTEND_URL = "http://localhost:3000"
 
@@ -169,7 +176,6 @@ FRONTEND_URL = "http://localhost:3000"
 #Token expiry
 
 from datetime  import timedelta
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 1 hour
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # 7 days
